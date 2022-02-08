@@ -36,7 +36,7 @@ class ConfigService {
       type: 'postgres',
       url: this.getValue('DATABASE_URL'),
       autoLoadEntities: true,
-      entities: ['dist/**/*.entity.js'],
+      entities: [User, Template, Valentine],
       migrationsTableName: 'migration',
       migrations: ['src/migration/*.ts'],
       cli: {
