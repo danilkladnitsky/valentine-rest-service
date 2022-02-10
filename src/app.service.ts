@@ -1,8 +1,11 @@
 import { Injectable } from '@nestjs/common';
 
+const StatsD = require('hot-shots');
+const dogstatsd = new StatsD();
 @Injectable()
 export class AppService {
-  getHello(): string {
-    return 'Hello World!';
+  ping(): string {
+    dogstatsd.increment('rest-service.ping_attempts');
+    return 'Service is working';
   }
 }
