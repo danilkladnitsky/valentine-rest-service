@@ -1,3 +1,5 @@
+const { createLogger, format, transports } = require('winston');
+var DatadogWinston = require('datadog-winston');
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
@@ -21,6 +23,25 @@ async function bootstrap() {
       origin: '*',
     }),
   );
+
+  const logger = createLogger({
+    level: 'info',
+    exitOnError: false,
+    format: format.json(),
+    transports: [new transports.File({ filename: `./logs/rest-logs.log` })],
+  });
+
+  logger.add(
+    new DatadogWinston({
+      apiKey: 'f09b651783b04ee629378c500db805e3c9dd153d',
+      hostname: 'Yandex.Oblako',
+      service: 'rest_service',
+      ddsource: 'nodejs',
+      ddtags: 'foo:bar,boo:baz',
+    }),
+  );
+
+  logger.info('Hey there', { thisIsMy: 'metadata' });
 
   await app.listen(process.env.PORT);
 }

@@ -1,5 +1,5 @@
-import { Injectable } from '@nestjs/common';
-
+import { Logger } from 'winston';
+import { Inject, Injectable } from '@nestjs/common';
 const StatsD = require('hot-shots');
 const dogstatsd = new StatsD();
 @Injectable()
