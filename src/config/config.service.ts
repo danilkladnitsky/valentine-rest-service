@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { join } from 'path';
 import { Template } from 'src/entities/templates.entity';
-import { User } from 'src/entities/user.entity';
+
 import { Valentine } from 'src/entities/valentine.entity';
 
 class ConfigService {
@@ -36,7 +36,7 @@ class ConfigService {
       type: 'postgres',
       url: this.getValue('DATABASE_URL'),
       autoLoadEntities: true,
-      entities: [User, Template, Valentine],
+      entities: [Template, Valentine],
       migrationsTableName: 'migration',
       migrations: ['src/migration/*.ts'],
       cli: {
