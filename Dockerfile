@@ -23,7 +23,7 @@ WORKDIR /usr/src/rest
 COPY --from=development / /usr/src/rest
 
 # EXPOSING PORT FOR OUTER WORLD
-EXPOSE 8080
+EXPOSE 3000
 
 # Run app
 CMD [ "node", "dist/main" ]
